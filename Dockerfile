@@ -8,8 +8,6 @@ ENV USER_NAME=tunnel
 # Allow mounting .ssh via Docker volume
 VOLUME ["/home/$USER_NAME/.ssh"]
 
-
-
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
@@ -17,6 +15,12 @@ RUN chmod +x /docker-entrypoint.sh
 RUN apk add --no-cache dropbear shadow libcap
 
 RUN setcap 'cap_net_bind_service=+ep' /usr/sbin/dropbear
+
+RUN apk add --no-cache musl-locales \
+    && echo "export LANG=en_US.UTF-8" >> /etc/profile \
+    && echo "export LC_ALL=en_US.UTF-8" >> /etc/profile
+
+COPY motd.txt /etc/motd
 
 # Generate host keys during build
 RUN mkdir -p /etc/dropbear && \
@@ -31,6 +35,6 @@ RUN adduser -D -s /bin/ash $USER_NAME
 RUN mkdir -p /home/$USER_NAME/.ssh && chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/.ssh
 
 # Expose SSH port (for tunneling) and HTTP port (for reverse tunnel)
-EXPOSE 22 80
+EXPOSE 22 80 8080
 # Run Dropbear in foreground
 ENTRYPOINT ["/docker-entrypoint.sh"]
