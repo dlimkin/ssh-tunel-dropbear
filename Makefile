@@ -1,6 +1,6 @@
 
 NAME := ssh-tunnel-dropbear
-VERSION := 1.0.0
+VERSION := 1.2.1
 
 DOCKER_USERNAME = dlimkin
 
