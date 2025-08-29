@@ -14,6 +14,12 @@ RUN apk add --no-cache dropbear shadow \
     && chown -R ${DEFAULT_USER}:${DEFAULT_USER} /home/${DEFAULT_USER}/.ssh \
     && chmod 700 /home/${DEFAULT_USER}/.ssh
 
+# Generate default host keys
+RUN mkdir -p /etc/dropbear && \
+    dropbearkey -t rsa -f /etc/dropbear/dropbear_rsa_host_key && \
+    dropbearkey -t ecdsa -f /etc/dropbear/dropbear_ecdsa_host_key && \
+    dropbearkey -t ed25519 -f /etc/dropbear/dropbear_ed25519_host_key
+
 # Volumes for keys
 VOLUME ["/home", "/etc/dropbear"]
 

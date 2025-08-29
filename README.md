@@ -1,11 +1,12 @@
-# SSH Tunnel Dropbear for Docker / Swarm
+# SSH Tunnel Proxy Server
 
-Minimal Docker setup to run a **Dropbear SSH server** for reverse SSH tunneling.  
-It allows your **local machine** to expose a local service (e.g., `localhost:80`) to a **Docker Swarm cluster**, while Kong or other services can access it via a fixed port.
+Minimal Docker setup to run a **SSH Tunnel Proxy Server with Dropbear** for reverse SSH tunneling.  
+It allows your **local machine** to expose a local service (e.g., `localhost:80`) 
+<p align="center" width="100%">
+<img width="70%" src="schema.png" alt="Schema">
+</p>
 
----
-
-# Funding 
+# 💰 Funding
 If you find this project useful, consider supporting its development through cryptocurrency donations:
 - BTC: `bc1qsrl63vcuqnmp6drl3f6uhcvnky2t5vqlg2r2jq` [QR code](https://dlimkin.github.io/#funding)
 - ETH or (ERC-20): `0xd1ce59aD3615cdbFCc8cc2C496E9CB0E10CD543B` [QR code](https://dlimkin.github.io/#funding)
@@ -14,7 +15,7 @@ If you find this project useful, consider supporting its development through cry
 
 ---
 
-## Features
+## ⚡ Features
 
 - Lightweight Dropbear SSH server on Alpine Linux
 - Configurable environment variable
@@ -23,7 +24,7 @@ If you find this project useful, consider supporting its development through cry
 
 ---
 
-## Environment Variables
+## 🔗 Environment Variables
 
 The following environment variables can be used to configured:
 
