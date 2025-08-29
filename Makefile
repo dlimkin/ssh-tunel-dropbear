@@ -1,8 +1,14 @@
 
 NAME := ssh-tunnel-dropbear
-VERSION := 1.3.1
+VERSION := 1.4.1
 
 DOCKER_USERNAME = dlimkin
+
+version:
+	sed -i 's/#version#/$(VERSION)/g' motd.txt
+
+version-reset:
+	sed -i 's/$(VERSION)/#version#/g' motd.txt
 
 build:
 	docker build --no-cache -t $(NAME):$(VERSION) -f Dockerfile .
@@ -12,5 +18,4 @@ push:
 	docker tag $(NAME):$(VERSION) $(DOCKER_USERNAME)/$(NAME):latest
 	@docker push -a $(DOCKER_USERNAME)/$(NAME)
 
-
-deploy: build push
+deploy: version build push version-reset

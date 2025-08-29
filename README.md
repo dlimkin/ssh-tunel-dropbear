@@ -27,14 +27,15 @@ If you find this project useful, consider supporting its development through cry
 
 The following environment variables can be used to configured:
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `USER_NAME` | `tunnel` | The username for SSH access. If not set, defaults to `tunnel`. |
-| `SSH_PUBLIC_KEY_FILE` | *empty* | Path to the public SSH key file. If provided, the key will be copied to the user's `~/.ssh/authorized_keys`. |
+| Variable | Default                                                      | Description |
+|----------|--------------------------------------------------------------|-------------|
+| `USER_NAME` | `tunnel`                                                     | The username for SSH access. If not set, defaults to `tunnel`. |
+| `SSH_PUBLIC_KEY_FILE` | *empty*                                                      | Path to the public SSH key file. If provided, the key will be copied to the user's `~/.ssh/authorized_keys`. |
+| `USER_PASS` | *random* (when `SSH_PUBLIC_KEY_FILE` is *empty*) | The password for the user. If not set, a random password will be generated and printed to the console. |
 
 ### Notes:
 - If `SSH_PUBLIC_KEY_FILE` is provided and valid or `authorized_keys` are mounted via volume, password authentication will be disabled.
-- If no key is provided, a **random password** will be generated and printed to the **console**.
+- If no key is provided, use `USER_PASS` to set a password or a **random password** will be generated and printed to the **console**.
 
 ## 1️⃣ Docker Example
 
