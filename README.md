@@ -72,6 +72,7 @@ services:
     image: dlimkin/ssh-tunnel-dropbear
     environment:
       - USER_NAME=mycustomuser # optional, default is 'tunnel', and change in volume target below
+      - USER_PASS=mysecretpass # optional, use only if no SSH key is provided
     ports:
       - "2022:22"
       - "8080:8080"
@@ -79,7 +80,7 @@ services:
         - /path/to/authorized_keys:/home/mycustomuser/.ssh/authorized_keys:ro
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.tunnel-server.rule=Host(`tunnel.example.com`)"
+      - "traefik.http.routers.tunnel-server.rule=Host(`devhost.mydomain.com`)"
       - "traefik.http.services.tunnel-server.loadbalancer.server.port=8080"
 ```
 
@@ -103,7 +104,7 @@ services:
       replicas: 1
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.tunnel-server.rule=Host(`tunnel.example.com`)"
+      - "traefik.http.routers.tunnel-server.rule=Host(`devhost.mydomain.com`)"
       - "traefik.http.services.tunnel-server.loadbalancer.server.port=8080"
 
 secrets:
